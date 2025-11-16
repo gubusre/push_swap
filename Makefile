@@ -1,41 +1,64 @@
-NAME = push_swap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gubusque <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/16 18:50:00 by gubusque        #+#    #+#                #
+#    Updated: 2025/11/16 18:50:47 by gubusque         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+NAME		= push_swap
 
-SRC_DIR = src
-LIBFT_DIR = libft
-OBJ_DIR = obj
-INCLUDE_DIR = include
+# Directorios
+SRC_DIR		= src
+LIBFT_DIR	= libft
+OBJ_DIR		= obj
+INC_DIR		= include
 
-SRCS = $(SRC_DIR)/main.c \
-		$(SRC_DIR)/ft_check.c \
-		$(SRC_DIR)/ft_sort.c \
-		$(SRC_DIR)/ft_print_ps.c \
-		$(SRC_DIR)/ft_print_rps.c
-LIBFT_SRCS = $(LIBFT_DIR)/ft_atoi.c 
+# Archivos en src/
+SRC_SRCS	= main.c \
+			  ft_check.c \
+			  ft_sort.c \
+			  ft_operations.c
 
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/src_%.o)
-LIBFT_OBJS = $(LIBFT_SRCS:$(LIBFT_DIR)/%.c=$(OBJ_DIR)/libft_%.o)
+# Archivo en libft/
+LIBFT_SRCS	= ft_atoi.c
 
+# Rutas completas
+SRC			= $(addprefix $(SRC_DIR)/, $(SRC_SRCS))
+LIBFT		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_SRCS))
+ALL_SRC		= $(SRC) $(LIBFT)
+OBJ			= $(addprefix $(OBJ_DIR)/, $(notdir $(ALL_SRC:.c=.o)))
+
+# Compilador
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+INC			= -I$(INC_DIR)
+
+# Reglas
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_OBJS)
-	$(CC) $(OBJS) $(LIBFT_OBJS) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/src_%.o: $(SRC_DIR)/%.c
-		@mkdir -p $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+# Compila desde src/ o libft/
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-$(OBJ_DIR)/libft_%.o: $(LIBFT_DIR)/%.c
-		@mkdir -p $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(LIBFT_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-		rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-		rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

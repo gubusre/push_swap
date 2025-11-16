@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 18:31:28 by gubusque          #+#    #+#             */
+/*   Updated: 2025/11/16 18:32:00 by gubusque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 #   define LIBFT_H
 
@@ -8,8 +20,8 @@
 
 typedef struct s_stacks
 {
-	int	*stack_a;
-	int	*stack_b;
+	int	*a;
+	int	*b;
 	int	size_a;
 	int	size_b;
 }	t_stacks;
@@ -19,6 +31,7 @@ int	check_has_duplicates(int *arr, int size);
 int	check_is_sorted(t_stacks *s);
 int	ft_atoi(const char *str);
 void	ft_push_swap_sort(t_stacks *s);
+
 void	sa(t_stacks *s);
 void	sb(t_stacks *s);
 void	ss(t_stacks *s);

@@ -49,7 +49,7 @@ int	check_is_sorted(t_stacks *s)
 	i = 0;
 	while (i < s->size_a - 1)
 	{
-		if (s->stack_a[i] > s->stack_a[i + 1])
+		if (s->a[i] > s->a[i + 1])
 			return (0);
 		i++;
 	}
