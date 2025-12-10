@@ -5,61 +5,44 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gubusque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/16 18:50:00 by gubusque        #+#    #+#                #
-#    Updated: 2025/11/16 18:50:47 by gubusque         ###   ########.fr        #
+#    Created: 2025/12/04 12:02:59 by gubusque          #+#    #+#              #
+#    Updated: 2025/12/10 22:54:25 by gubusque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= push_swap
+NAME = push_swap
 
-# Directorios
-SRC_DIR		= src
-LIBFT_DIR	= libft
-OBJ_DIR		= obj
-INC_DIR		= include
+SRC = \
+      	bubble_sort.c	   ft_atoi.c	ft_swap.c  ra.c		rrr.c	main.c	\
+	check_args.c	   ft_efree.c	pa.c	   rb.c		size3.c		\
+	check_num.c	   ft_free.c 	pb.c	   rr.c		size5.c		\
+	check_order.c	   ft_index.c	sa.c	   rra.c	push_swap.c	\
+	check_same_nums.c  ft_strlen.c	sb.c	   rrb.c	s_push_swap.c	\
 
-# Archivos en src/
-SRC_SRCS	= main.c \
-			  ft_check.c \
-			  ft_sort.c \
-			  ft_operations.c
 
-# Archivo en libft/
-LIBFT_SRCS	= ft_atoi.c
+OBJ = $(SRC:.c=.o)
 
-# Rutas completas
-SRC			= $(addprefix $(SRC_DIR)/, $(SRC_SRCS))
-LIBFT		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_SRCS))
-ALL_SRC		= $(SRC) $(LIBFT)
-OBJ			= $(addprefix $(OBJ_DIR)/, $(notdir $(ALL_SRC:.c=.o)))
+INCLUDE = pushswap.h
+CC = cc
+CCFLAGS = -Wall -Wextra -Werror -Include
+RM = rm -f
 
-# Compilador
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-INC			= -I$(INC_DIR)
+all: $(NAME) clean
 
-# Reglas
-all: $(NAME)
+$(NAME): $(OBJ) $(INCLUDE)
+	$(CC) $(OBJ) -o $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-
-# Compila desde src/ o libft/
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(LIBFT_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+%.o: %.c
+	$(CC) $(CCFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf $(OBJ_DIR)
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+rebonus: fclean all
 
 .PHONY: all clean fclean re

@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 18:15:51 by gubusque          #+#    #+#             */
-/*   Updated: 2025/12/09 22:57:45 by gubusque         ###   ########.fr       */
+/*   Created: 2025/12/10 20:14:29 by gubusque          #+#    #+#             */
+/*   Updated: 2025/12/10 23:49:40 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -37,13 +37,13 @@ typedef struct s_list
 	int	error;
 }	t_list;
 
-int	main(int arc, char **argv);
-int	check_args(char **args, int argc);
-int	check_num(char *s);
-int	ft_strlen(char *s);
-int	ft_atoi(const char *s, t_list *d);
-int	check_order(t_list *d);
-int	check_same_nums(t_list *d);
+int		main(int arc, char **argv);
+int		check_args(char **args, int argc);
+int		check_num(char *s);
+int		ft_strlen(char *s);
+int		ft_atoi(const char *s, t_list *d);
+int		check_order(t_list *d);
+int		check_same_nums(t_list *d);
 void	bubble_sort(t_list *d);
 void	ft_swap(int *argv1, int *argv2);
 void	ft_index(t_list *d);

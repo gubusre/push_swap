@@ -6,7 +6,7 @@
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:50:48 by gubusque          #+#    #+#             */
-/*   Updated: 2025/12/09 22:57:10 by gubusque         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:50:03 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,11 @@ static void	ft_size(t_list *d)
 	if (d->argc < 20 && d->argc > 5)
 		d->blocks = 1;
 	if (d->argc < 101 && d->argc > 19)
-		d->blocks = 4;
+		d->blocks = 5;
 	if (d->argc > 100)
-		d->blocks = 7;
-	ft_sort(d);
-}
-
-static int	ft_checker(t_list *d)
-{
-	if (check_order(d) == -1)
-		return (-1);
-	if (check_same_nums(d) == -1)
-		return (-1);
-	return (0);
+		d->blocks = 12;
+	if (d->blocks > 0)
+		ft_sort(d);
 }
 
 static int	ft_stack(t_list *d, char *argv[])
@@ -64,6 +56,10 @@ static int	ft_stack(t_list *d, char *argv[])
 		d->s_s[i] = d->s_a[i];
 		i++;
 	}
+	if (check_order(d) == -1)
+		return (-1);
+	if (check_same_nums(d) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -77,6 +73,7 @@ static int	ft_data(t_list *d, char *argv[])
 	d->isa = d->argc;
 	d->isb = 0;
 	d->iss = d->argc;
+	d->blocks = 0;
 	if (ft_stack(d, argv) == -1)
 		return (-1);
 	return (0);
@@ -96,8 +93,6 @@ int	main(int arc, char *argv[])
 	if (check_args(argv, d->argc) == -1)
 		ft_efree(d);
 	if (ft_data(d, argv) == -1)
-		ft_efree(d);
-	if (ft_checker(d) == -1)
 		ft_efree(d);
 	ft_size(d);
 	ft_free(d);
